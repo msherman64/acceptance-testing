@@ -15,6 +15,8 @@ jobs:
     runs-on: ubuntu-${{ matrix.ubuntu_version }}
     name: Deploy OpenStack ${{ matrix.name }} with defaults and run basic acceptance tests
     steps:
+      - name: Work around broken dnsmasq
+        run: sudo apt-get purge -y dnsmasq-base
       - name: Deploy devstack
         uses: EmilienM/devstack-action@v0.15
         with:
